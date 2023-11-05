@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+    <div class="title">CALCULATOR </div>
+   
+    <table border="1">
+      
+        
+        <tr>
+            <td colspan="4" ><input type="text" id="result"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" style="background-color: red;" value="AC" onclick="clr()"></td>
+            <td colspan="2"><input type="button" style="background-color: orange;" value="Del" c onclick="del()"></td>
+            
+        </tr>
+        <tr>
+            <td><input type="button" value="1" onclick="display('1')" ></td>
+            <td><input type="button" value="2" onclick="display('2')" ></td>
+            <td><input type="button" value="3" onclick="display('3')" ></td>
+            <td><input type="button" value="/" onclick="display('/')" ></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="4" onclick="display('4')" ></td>
+            <td><input type="button" value="5" onclick="display('5')" ></td>
+            <td><input type="button" value="6" onclick="display('6')" ></td>
+            <td><input type="button" value="-" onclick="display('-')" ></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="7" onclick="display('7')" ></td>
+            <td><input type="button" value="8" onclick="display('8')" ></td>
+            <td><input type="button" value="9" onclick="display('9')" ></td>
+            <td><input type="button" value="+" onclick="display('+')" ></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="." onclick="display('.')" ></td>
+            <td><input type="button" value="0" onclick="display('0')" ></td>
+            <td><input type="button" value="=" style="background-color: rgb(5, 248, 5);" onclick="equate()"></td>
+            <td><input type="button" value="*" onclick="display('*')" ></td>
+        </tr>
+    </table>
+    <script>
+        function clr(){
+            document.getElementById("result").value = " ";
+        }
+        function display(a){
+            //document.getElementById("result").value+=a;
+            const resultField = document.getElementById("result");
+
+            if (resultField.value === "ERROR") {
+                resultField.value = a;
+            } else {
+                resultField.value += a;
+        }
+        }
+        function del() {
+        let currentResult = document.getElementById("result");
+        currentResult.value = currentResult.value.slice(0, -1); 
+        }    
+        
+        function equate() {
+            const resultField = document.getElementById("result");
+            const input = resultField.value;
+
+    
+            if (/[\d.]+\s*[-+*/]+\s*[-+*/]+\s*[\d.]+/.test(input)) {
+                resultField.value = "ERROR";
+                return;
+            }
+
+            try {
+                const result = eval(input);
+
+                if (isNaN(result)) {
+                    resultField.value = "ERROR";
+                } else {
+                    resultField.value = result;
+                }
+            } catch (error) {
+                resultField.value = "ERROR";
+            }
+        }
+
+
+    </script>
+</body>
+</html>
